@@ -1,0 +1,668 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,700;1,100&display=swap');
+                
+:root{
+    --background-color : #112a46 ;
+    --background-shade : #112740;
+    --background-deep: #091625;
+    --background-light: #1c3a56;
+    --light-green: #7fd685;
+    --deep-green:#4f6f40;
+    --orange:#ffe25a;
+}
+*{
+    padding:0;
+    margin: 0;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    background: var(--background-color);
+}
+.myLgreen{
+    color: var(--light-green);
+}
+button#back_to_top {
+    display: none;
+    background-color: white;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 3px;
+    z-index: 99;
+}
+/* ########### menu controler ############## */
+nav.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.nav_wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-basis:100%;
+}
+.menu_burger{
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+ul.menu_list{
+    list-style: none;
+    display: flex;
+    flex-direction:column ;
+    flex-basis: 100%;
+    max-height: 0px;
+    transition: max-height 1.2s linear;
+    overflow: hidden;
+}
+.menu_show {
+    max-height: 1000px !important;
+}
+.menu_list a {
+    text-decoration: none;
+    padding: 10px ;
+    display: block;
+    text-align: center;
+}
+.menu_list a:hover{
+    background-image: linear-gradient(to bottom right,hsla(212, 61%, 17%, 0.5) ,hsla(101, 27%, 34%, 0.5))
+}
+
+
+@media screen and (min-width:920px){
+    .menu_burger{
+       display: none;
+    }
+    nav.nav {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .nav_wrap {
+        display: flex;
+        justify-content: space-between;
+        flex-basis:auto;
+    }
+    ul.menu_list{
+        list-style: none;
+        display: flex;
+        flex-direction: row ;
+        flex-basis: auto;
+        align-self: center;
+        height: auto;
+        max-height: 100px;
+    }
+    .menu_list a:hover{
+        background-image:none;
+        color: grey;
+    }
+}
+
+/* ################################## */
+
+/* ######## JUMBOTRON ######## */
+.jumbotron {
+    position: relative;
+}
+.jumbotron:hover .caption {
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+.caption{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transition: background-color .8s ease-in-out;
+}
+.caption button{
+    display: inline-block;
+    padding: .7rem 1rem;
+    border: 4px solid white;
+    font-size: 1.3rem; 
+    background-color: transparent;
+    border-radius: 4px ;
+    margin-bottom: 2.5rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 4;
+
+}
+.caption button::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 0px;
+    transition: width .5s ease-in-out;
+    background-color: rgba(79, 111, 64, 0.327);
+}
+
+.caption button:hover::before{
+    width: 100%;
+}
+/*  REGISTRATION CENTER */
+
+.sign_up_register {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sign_up_register button {
+    background-color: var(--light-green);
+    border: 0;
+    padding: .7rem 1.5rem;
+    display: block;
+    margin: 20px 0;
+    cursor: pointer;
+}
+.sign_up_register button:hover {
+    background-color: var(--deep-green);
+
+}
+@media screen and (min-width:800px){
+    .sign_up_register button{
+        padding: 1.2rem 1.8rem;
+        border-radius: 3px;
+    }
+}
+/* ################## */
+
+/* £########  section Area  #############*/
+.home_section {
+    padding: 1rem;
+    text-align: center;
+}
+.home_section h2 {
+    padding: .5rem;
+}
+.home_section .content {
+    margin: .7rem 0;
+}
+.ourServices {
+    background-color: var(--background-shade);
+}
+
+
+.dash {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 0px;
+    border: 2px solid var(--orange);
+    transition: width .8s ease-in;
+} 
+span[data-aos="dash-active"] {
+   opacity: 1;
+}
+.dash-active {
+    width: 80px;
+}
+
+.services li {
+    list-style-type: none;
+    padding: .5rem 0;
+    margin: .8rem 0;
+}
+.services li img {
+    width: 70px;
+}
+.services li img.services_return_img_{
+    height: 70px;
+    width: auto;
+}
+.services li img.services_globe_img_ {
+    width: 50px;
+}
+.services li .content {
+    margin-top: .5rem;
+}
+ 
+
+@media screen and (min-width:800px){
+    .home_section {
+        padding: 2.4rem;
+    }
+    .services{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .services li{
+        flex-basis: 50%;
+        padding:1rem 4rem;
+        margin: 1.5rem 0;
+    }
+    .home_section.aboutUs {
+        padding: 5rem;
+    }
+
+}
+/* ################################### */
+
+/* #######investment section ########### */
+.investment_header img {
+    width: 100%;
+}
+/* ########### carousel for investment section ######### */
+.investment_banner{
+    position: relative;
+}
+.investment_carousel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.investment_carousel_relative{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.349);
+}
+.investment_carousel .slide {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 30%;
+    padding: 0 2rem;
+    opacity: 0;
+    transition:opacity 2s linear;
+}
+.investment_carousel .slide div {
+    flex-basis: 100%;
+}
+.investment_carousel .slide.slide_active {
+    opacity: 1;
+}
+
+.investment_header .investment_coinlib_widget {
+    display: none;
+}
+.investment{
+    padding: 1rem;
+    margin: 2rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.investment .investment_title{
+    flex-basis: 100%;
+    margin-bottom: 1rem;
+}
+.investment h2 {
+    padding: .5rem;
+}
+.investment .card {
+    background-color: var(--background-light);
+    margin: 1rem;
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    width: 300px;
+}
+.investment .card_body>p {
+    font-size: 1.2em;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: .15rem;
+}
+.investment .card_body small, .investment .card_body .content p {
+    font-size: .6em;
+}
+
+.investment .card_body {
+    line-height: 3rem;
+}
+.investment .card_body button {
+    background-color: var(--deep-green);
+    padding: .8rem 2.3rem;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: color .8s ease-in;
+}
+.investment .card_body button:hover{
+    background-color: var(--light-green);
+}
+@media screen and (min-width:600px){
+    .investment_header{
+        display: flex;
+    
+    }
+    .investment_banner{
+        width: 50%;
+    }
+    .investment_header img {
+        width: 100%;
+        display: block;
+        height: 100%;
+        max-height: 450px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .investment_header .investment_coinlib_widget{
+        display: block;
+        flex-grow: 1;
+    }
+    .investment_header section{
+        flex-basis: 100%;
+    }
+}
+
+
+/* ######## section Contact US ########### */
+section.contact_us {
+    text-align: center;
+    padding: 2rem 0 ;
+    background-color: var(--background-color);
+    background-color: var(--background-shade);
+}
+section.contact_us form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+section.contact_us input, section.contact_us textarea {
+    display: block;
+    padding: 1rem;
+    border-radius: 4px;
+    border: none;
+    margin: 1rem 0;
+    transition: border .7s ease-in-out;
+    color: black;
+}
+section.contact_us input:focus, section.contact_us textarea:focus{
+    border: 2px solid var(--light-green); 
+    outline: none;
+}
+section.contact_us button {
+    background-color: var(--deep-green);
+    padding: .8rem 2.3rem;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: color .8s ease-in;
+    font-size: 1.2rem;
+}
+section.contact_us button:hover{
+    background-color: var(--light-green);
+}
+
+/* ######### section end ############ */
+
+/*  ############ Frequently asked questions FAQ ############## */
+
+section.faq {
+    padding: 1rem;
+}
+section.faq .faq_header {
+    text-align: center;
+}
+section.faq h2 p {
+    display: inline-block;
+}
+section.faq .faq_header p::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 5px;
+    background-color: var(--orange);
+    position: relative;
+    left: -25px;
+    top: 17px ;
+}
+section.faq .faq_header p::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 5px;
+    background-color: var(--orange);
+    position: relative;
+    bottom: 17px ;
+    left: 155px;
+}
+section.faq ul li {
+    list-style-type: none;
+    border: 2px  solid var(--background-shade);
+    border-left: none;
+    border-radius: 4px;
+    max-width: 600px;
+    margin: 1rem auto;
+    
+}
+
+section.faq .faq_item_title {
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    border-bottom: 2px solid var(--background-shade);
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+}
+section.faq .faq_item_title:hover {
+    background-color: var(--background-shade);
+}
+.active_faq span.plus {
+    transform: rotate(405deg)
+}
+.active_faq p {
+    max-height: 400px  !important;
+    padding: 1rem;
+}
+.active_faq span svg path {
+    fill: red !important;
+}
+.faq_item_title span{
+   display: block;
+   min-width: 30px;
+   max-width: 30px;
+   color: var(--orange);
+   transition: transform  .5s ease-in-out;
+}
+section.faq .faq_item_content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .8s ease-in-out;
+    transition: padding .3s ease-in-out;
+    font-style: italic;
+    letter-spacing: .01111rem;
+    font-weight: 300;
+    background-color: var(--background-shade);
+}
+
+
+@media screen and (min-width:500px){
+    section.faq .faq_item_title {
+        padding: 1.5rem;
+    }  
+}
+
+/* ############## end ############### */
+
+/* ############# CUSTOMER REVIEWS ############## */
+
+.customer_reviews {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+.customer_reviews .title {
+    margin-bottom:2rem ;
+}
+
+.customer_reviews .content {
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding: 1rem 0;
+    background-color: var(--background-color);
+
+}
+/* width */
+.customer_reviews .content::-webkit-scrollbar {
+    width: 20px;
+    background-color: white;
+  }
+  
+   
+  /* Handle */
+  .customer_reviews .content::-webkit-scrollbar-thumb {
+    background: var(--light-green); 
+    border-radius: 10px;
+    border: 2px solid white;
+    box-shadow: 2px 5px 10px 0px black;
+  }
+  
+  /* Handle on hover */
+  .customer_reviews .content::-webkit-scrollbar-thumb:hover {
+    background: var(--deep-green); 
+
+  }
+
+.item-card {
+    text-align: center;
+    margin-right: 1rem;
+    display: inline-block;
+}
+.blockname {
+display: flex;
+flex-direction: row;
+max-width: 350px;
+margin: auto;
+margin-bottom: 2rem;
+justify-content: space-between;
+align-items: center;
+padding: 0 1rem;
+}
+.blockname img {
+border-radius: 50%;
+border: 2px solid white;
+box-shadow: 2px 0px 10px 0px black;
+}
+.block {
+position: relative;
+background-color: var(--background-deep);
+padding: 1rem 2rem;
+margin-bottom: 1rem;
+margin-top: 3rem;
+max-width: 400px;
+margin: auto;
+border-radius: 0.3rem;
+box-shadow: 1px 0px 7px 0px black;
+}
+.block:before {
+content: "";
+position: absolute;
+top: -20px;
+right: 0;
+left: 71px;
+width: 0;
+height: 0;
+border-left: 0px solid transparent;
+border-bottom: 20px solid var(--background-deep);
+border-right: 20px solid transparent;
+}
+.card-text {
+max-width: 700px;
+margin: auto;
+color: #ffffff;
+}
+.display-5 {
+font-family: 'Roboto',sans-serif;
+font-size: 1rem;
+}
+
+.mbr-text {
+font-style: normal;
+line-height: 1.5;
+font-weight: 400;
+}
+.display-5 {
+    font-size: 0.8rem;
+    font-size: calc( 1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc( 1.4 * (1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20))));
+    white-space: normal;
+}
+
+@media (max-width: 768px){
+.display-5 {
+font-size: 0.8rem;
+font-size: calc( 1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20)));
+line-height: calc( 1.4 * (1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20))));
+}
+}
+/* ############ FOOTER ######### */
+
+footer{
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--deep-green);
+    bottom: 0px;
+    margin-top: 5rem;
+    padding-bottom:0;
+}
+footer ul {
+    margin: 0 auto;
+    max-width: 800px;
+    list-style-type: none;
+}
+footer ul:nth-child(2){
+    display: flex;
+
+}
+footer nav a {
+    color: rgb(223, 215, 215);
+}
+footer nav a:hover {
+    color: var(--light-green) ;
+}
+footer ul li {
+    margin: 1.5rem 0;
+    padding: .5rem;
+}
+footer ul li div.first {
+    margin-bottom: 1rem;
+}
+footer ul h2, footer ul h3 {
+    margin-bottom: .4rem ;
+    letter-spacing: .511px;
+    color: var(--orange);
+}
+footer ul a {
+    display: block;
+    text-decoration: none;
+    margin: .3rem 0;
+}
+footer > div {
+    padding: 1rem;
+    border-top: 2px solid white;
+    text-align: center;
+}
+@media screen and (min-width:600px){
+    footer ul{
+        display: flex;
+        justify-content: space-around;
+    }
+}

@@ -1,0 +1,16 @@
+
+<!--  #### contact us section ######## -->
+<section id="contactus" class="contact_us">
+    <h1> Contact us</h1>
+    <span class="dash" data-aos="dash-active"></span>
+    <p style="height: 20px; font-size: .7rem; color: yellow; padding:.4rem .9rem .2rem .9rem ;">
+    <%= messages.error ? messages.error : "" ; %>
+    </p>
+    <form  action="/contactus" method="POST">
+        <input type="email" name="email" placeholder="your Email">
+        <input type="text" name="name" placeholder="Your full name" >
+        <textarea name="body" id="" cols="30" rows="10"placeholder="your message"></textarea>
+        <button> Send </button>
+    </form>
+</section>
+<!--  ####### section end####### -->

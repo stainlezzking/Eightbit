@@ -1,0 +1,23 @@
+  
+    <script>
+        let allLinks = document.querySelectorAll(".navbar-nav .nav-item a")
+         allLinks.forEach(link => {
+             if(link.getAttribute("href") === "<%= variables.active%>") link.classList.add("active")
+             else null
+          })
+         
+    </script>
+  <!-- ALL THESE ARE Argon Scripts -->
+  <!-- Core -->
+  <script src="static/js/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="static/js/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="static/js/vendor/js-cookie/js.cookie.js"></script>
+  <script src="static/js/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="static/js/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+
+  <!-- Argon JS -->
+  <script src="static/js/vendor/argon.js?v=1.2.0"></script>
+  <!-- ########## -->
+</body>
+
+</html>

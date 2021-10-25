@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Contact us</title>
+    <meta name="keywords" content="broker, invest,Eight-bit investment, how to invest on Eight-bit, binary trading, Eightbit">
+    <meta name="description" content="Eight-bit is an American based registered company. we are rapidly creating head financier firm on money related business sector. We give money related help extensive variety of financial instruments. Gathering stores of our speculators and making them work as indicated by inventive assessed plans in the amplest scope of worldwide benchmark items over all significant resource classes, including fates and alternatives taking into account interest rates.">
+    
+    <link rel="shortcut icon" type="image/x-icon" href="static/images/favicon.png" />
+
+    <!-- css styles -->
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="static/assets/css/style.css">
+    <link rel="stylesheet" href="static/css/home.css">
+    
+   <style type="text/css">
+.dash{
+    width: 80px
+}
+.page-header{
+          background-image: url("static/images/about_banner.jpg");
+      }
+    </style>
+</head>
+<body>
+  <%- include("partials/preloader.ejs") -%>
+<section class="header-section page-header">
+    <!-- Header  -->
+    <header class="header-area">
+        <div class="dope-nav-container left breakpoint-on">
+          <div class="container-fluid px-0">
+            <%- include('partials/header.ejs'); %>
+            <div class="container">
+                <div class="row section-gap">
+                  <div class="col-md-12">
+                    <h1 >Reach Us</h1>
+                    <ul class="pagination">
+                      <li style="color:orange"><a href="/">Go to Home</a></li>
+                      <li>Contact us</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </header>
+</section>
+<!--  #### contact us section ######## -->
+<%- include("partials/emailUs.ejs") -%>
+<!--  ####### section end####### -->
+
+<!-- FOOTER SECTION ######## -->
+      <%- include("./partials/footer.ejs") -%>
+</body>
+</html>

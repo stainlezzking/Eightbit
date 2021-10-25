@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Deposit to your account</title>
+  <!-- Favicon -->
+  <link rel="icon" href="static/images/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="static/css/profile/argon.css" type="text/css">
+  <style>
+    .bg-ballance{
+        background-color: #1c3a56;
+      }
+      .text-ballance {
+          color: gold;
+      }
+  </style>
+</head>
+<% const {user, admin} = variables %>
+
+<body >
+    <!-- ##### modal for error -->
+ <%- include("partials/modal.ejs") -%>
+  <!-- Modal end## -->
+
+
+  <!-- NAV section -->
+<%- include("partials/nav.ejs") -%>
+<!-- Nav end -->
+
+<%# function to sort deposits by the by sort which is basically date #%>
+<% function sortFunction(itemA,itemB){ %>
+  <% if(itemA.sort < itemB.sort){ return -1} %>
+ <% if(itemA.sort > itemB.sort){ return 1} %>
+ <% return 0 %>
+<% } %>
+
+
+
+<div class="header">
+  <div class="container-fluid">
+      <div class="row mt-2 px-3">
+          <div class="col-7 col-sm-4 col-lg-3 bg-ballance rounded p-2">
+              <h5 class="card-title text-uppercase mb-0 text-ballance" > Wallet ballance</h5>
+                    <span class="h2 font-weight-bold mb-0 text-white"><b class="text-success"> $</b> <%= user.account.ballance.toLocaleString("en-US") %></span> 
+          </div>
+      </div>
+</div>
+
+    <!--DEPOSIT HISTORY SECTION -->
+    <div class="header pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-dark d-inline-block mb-0">Deposit History</h6>
+            </div>
+          </div>
+             <!-- ####### History table ######## -->
+             <table class="table bg-white shadow-sm rounded">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col"> Status</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+
+            <% if(user.account.deposits.length){ %>
+              <% user.account.deposits.sort(sortFunction).forEach((history,index)=>{ %>
+               <% var className = history.approved ?  "text-success" : "text-warning" %>
+               <%  status = history.approved ?  "approved" : "pending" %>
+                  <tr>
+                    <th scope="row"> <%= index+1 %> </th>
+                    <td class="<%= className %>"><%= history.status %></td>
+                    <td><b>$ </b><%= history.amount %></td>
+                    <td> <%= history.date.toLocaleDateString() %></td>
+                  </tr>
+                <% }) %>
+           <%  }else{ %>
+                  <tr>
+                    <th scope="row">#</th>
+                    <td class="text-light" colspan="2"> You have no deposit history</td>
+                  </tr>
+               <% } %>
+                </tbody>
+              </table>
+
+        </div>
+      </div>
+    </div>
+<div class="text-center"> After deposits, take a screenshot and upload in confirm deposits section for validation</div>
+    <!-- ###### deposit section ##### -->
+    <section class="container-fluid mb-3">
+        <form class="bg-white shadow-sm rounded p-2" method="post">
+            <h3 class="header bg-success text-center mb-3 rounded p-2">
+                <i class="far fa-credit-card"></i>
+                Make Deposit
+            </h3>
+            <div class="main-group pt-4">
+                <h3 class="header text-center mb-3">
+                    <i class="fas fa-hand-point-down px-2"></i>
+                    Choose a payment Method
+                </h3>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gateWay" id="btc" value="<%= admin.account.btc %>">
+                    <label class="form-check-label" for="btc">
+                      Bitcoin transfer
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gateWay" id="etherium"  value="<%= admin.account.etherium %>">
+                    <label class="form-check-label" for="etherium">
+                      Etherium Transfer
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gateWay" id="PM"  value="<%= admin.account.perfectM %>">
+                    <label class="form-check-label" for="PM">
+                      Perfect Money
+                    </label>
+                  </div>
+                  <div class="input-group mt-2">
+                    <input type="Number" name="amount" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                    <span class="input-group-text">0.00</span>
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary mt-3 d-block mx-auto"> Deposit</button>
+            </div>
+        </form>
+    </section>
+</div>
+<script>
+    // i did not remove the innerHTML of ".modal button" like i did in confirm.ejs and notification.ejs bcs i didnt use btStrap css 
+    // here just the compiled one argon(the template owner created) which doesnt have the X button
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+    message = "Make sure a payment method is checked and please note the least deposit amount is 100$..thank you"
+    title = "Fill all inputs"
+   let form = document.querySelector("form")
+    form.addEventListener("submit", function(e){
+        e.preventDefault()
+        amount = Number(form.amount.value)
+        if(form.gateWay.value && !(amount<100)){
+            return form.submit()
+        }
+        else{
+            document.querySelector('.modal-body').innerText = message
+            document.querySelector('.modal-title').innerText = title
+            myModal.show()
+        }
+    })
+</script>
+<!-- FOOTER START -->
+<%- include("partials/closing.ejs") -%>
+<!-- ######## -->

@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/css/profile/argon.css" type="text/css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap" rel="stylesheet">
+  <style>
+
+    body{
+      background-image: url("/static/images/lil_baby.png");
+      background-position:center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Carrois Gothic', sans-serif;
+    }
+    li {
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <!-- modal section is here -->
+
+  <div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-details-tab" data-bs-toggle="tab" data-bs-target="#nav-details" type="button" role="tab" aria-controls="nav-details" aria-selected="true">Details</button>
+              <button class="nav-link" id="nav-edit-tab" data-bs-toggle="tab" data-bs-target="#nav-edit" type="button" role="tab" aria-controls="nav-edit" aria-selected="false"><i class="far fa-edit"></i> Edit</button>
+            </div>
+          </nav>
+            <button type="button" class="btn-close btn" data-bs-dismiss="modal" aria-label="Close"> X</button>
+        </div>
+        <!-- first pane show details -->
+    <div class="modal-body tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+          <h4 class="modal-title text-center user" > Ebuka Stanley </h4>
+
+          <form action="/admin/dashboard/delete" method="POST" >
+            <input type="hidden" class="user" name="username" value="username">
+          <ul class="list-group">
+            <li class="list-group-item" data-target="name"> Full name : </li>
+            <li class="list-group-item" data-target="ballance">ballance : <span> </span></li>
+            <li class="list-group-item" data-target="created"> date </li>
+            <li class="list-group-item d-flex justify-content-between"  style="cursor:pointer;"data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              Ip details
+              <i class="fas fa-caret-down ms-auto"></i>
+              </li>
+            <li class="list-group-item collapse p-0 bg-light"  id="collapseExample">
+              <div class="list-group-item bg-light text-white" data-target="ip">
+              </div>
+              <div class="list-group-item bg-light text-white" data-target="ip-country">
+            
+              </div>
+              <div class="list-group-item bg-light text-white" data-target="ip-city">
+          
+              </div>
+            </li>
+            <li class="list-group-item" data-target="country"> country e :  </li>
+            <li class="list-group-item" data-target="email">email :  </li>
+            <li class="list-group-item" data-target="password">password :  </li>
+            <li class="list-group-item" data-target="phoneNumber">phoneNumber :  </li>
+            <li class="list-group-item" data-target="walletAddress">wallet Address :  </li>
+          </ul>
+          <button class="btn btn-primary mx-auto mt-2 d-block"> delete</button>
+                <!-- add a confirm message before being able to delete -->
+                <!-- the modal that contains the user details will have an edit section -->
+          </form>
+      </div> 
+
+      <!-- second pane edit details -->
+    <div class="tab-pane fade" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
+        <h4 class="modal-title text-center user" > @username </h4>
+
+      <form action="/admin/dashboard/update" method="POST" >
+          <input type="hidden" class="user" name="username">
+        <ul class="list-group">
+          <li class="list-group-item-second form-group"> 
+            <label for="exampleInputPassword1" class="form-label">Ballance</label>
+            <input type="text" name="ballance" class="form-control" id="exampleInputPassword1" required autofocus data-target="ballance">
+          </li>
+          <li class="list-group-item-second form-group" >
+            <label for="exampleInputPassword2" class="form-label">Email</label>
+             <input type="email" name="email" id="exampleInputPassword2" class="form-control"required  data-target="email">
+          </li>
+          <li class="list-group-item-second form-group" > 
+            <label for="exampleInputPassword3" class="form-label">Password</label>
+            <input type="text" name="password" class="form-control" for="exampleInputPassword23" required  data-target="password">
+          </li>
+          <li class="list-group-item-second form-group" > 
+            <label for="exampleInputPassword4" class="form-label">Wallet</label>
+            <input type="text" name="walletAddress" class="form-control" id="exampleInputPassword4" required  data-target="walletAddress">
+          </li>
+        </ul>
+        <button class="btn btn-primary mx-auto mt-2 d-block"> Edit</button>
+              <!-- add a confirm message before being able to delete -->
+              <!-- the modal that contains the user details will have an edit section -->
+      </form>
+    </div> 
+    </div>
+      </div>
+    </div>
+  </div>
+
+<%- include("partials/nav.ejs") -%>
+    <!-- Header -->
+    <div class="header  mb-3">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-dark d-inline-block mb-0 text-white"> abcd </h6>
+            </div>
+          
+          </div>
+     </div>
+    </div>
+</div>
+  <div class="container">
+        <div class="header">
+            <h3 class="text-white"> Manage Accounts</h3>
+        </div>
+      <%  if(users.length){ %>
+        <ul class="body_details list-group" role="button">
+          <%  users.forEach(user=>{ %>
+                <li class="account list-group-item check_details d-flex justify-content-between align-items-center" style="cursor: pointer;">
+                    <h4 class="account_username">
+                        <%= user.username %>
+                    </h4>
+                    <div class="account_details">
+                      <input type="hidden" name="username" value="<%= user.username %>">
+                      <input type="hidden" name="name" value="<%= user.name %>">
+                      <input type="hidden" name="password" value="<%= user.password %>">
+                      <input type="hidden" name="created" value="<%= new Date(user.created_at).toLocaleDateString() %>">
+                      <input type="hidden" name="ballance" value="<%= user.account.ballance %>">
+                      <input type="hidden" name="phoneNumber" value="<%= user.phoneNumber %>">
+                      <input type="hidden" name="email" value="<%= user.email %>">
+                      <input type="hidden" name="walletAddress" value="<%= user.walletAddress %>">
+                      <input type="hidden" name="country" value="<%= user.country %>">
+                      <input type="hidden" name="ip-country" value="<%= user.ipInfo.ipCountry %>">
+                      <input type="hidden" name="ip-city" value="<%= user.ipInfo.city %>">
+                      <input type="hidden" name="ip" value="<%= user.ipInfo.ip %>" >
+                    </div>
+                </li>
+          <%  }) %>
+          </ul>
+       <% } %>
+  </div>     
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+ let  myModal = new bootstrap.Modal(document.getElementById('myModal'))
+  // check for details
+  document.querySelectorAll(".check_details").forEach(detail=>{
+    detail.addEventListener("click", function(e){
+      detail.querySelectorAll(".account_details input").forEach(input=>{
+        if(input.name == "username"){
+          // setting username in relevant filleds
+        return  document.querySelectorAll(".user").forEach(tag=>{
+            tag.tagName == "INPUT" ? tag.value = input.value : tag.innerHTML = input.value
+          })
+        }
+        document.querySelectorAll("#myModal .list-group-item").forEach(li=> input.name == li.getAttribute("data-target") ? li.innerHTML = input.name+" : "+ input.value : false )
+        document.querySelectorAll("#myModal .list-group-item-second input").forEach(li=> input.name == li.name ? li.value = input.value : false )
+        myModal.show()
+      })
+    })
+  })
+
+  document.querySelector("form").addEventListener("submit", function(event){
+    event.preventDefault()
+      confirm("are you sure that you want to delete this user") ? this.submit() : false
+    })
+    document.querySelectorAll("form")[1].addEventListener("submit", function(event){
+    event.preventDefault()
+      confirm("are you sure that you want to edit this user details") ? this.submit() : false
+    })
+
+</script>
+<!-- -->
+
+<%- include("./partials/footer.ejs") -%>

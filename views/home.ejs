@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="static/images/favicon.png" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="static/bootstrap-5.0.2-dist/css/bootstrap.css"> -->
+    <!--  remeber to change the style and script to minified version or better still cdn -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="static/css/home.css">
+    <!--  AOS JVS-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <meta name="keywords" content="broker, invest, Eight-bit,high profit,invest on Eight-bit, binary trading">
+    <meta name="description" content="Eight-bit is an American based registered company. we are rapidly creating head financier firm on money related business sector. We give money related help extensive variety of financial instruments. Gathering stores of our speculators and making them work as indicated by inventive assessed plans in the amplest scope of worldwide benchmark items over all significant resource classes, including fates and alternatives taking into account interest rates.">
+    <title> Welcome to Eight investment</title>
+</head>
+<body>
+    <%- include("partials/preloader.ejs") -%>
+  <button id="back_to_top" >
+    <svg aria-hidden="true" width="15px" focusable="false" data-prefix="fas" data-icon="angle-up" class="svg-inline--fa fa-angle-up fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="#ffe25a" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
+  </button>
+<!-- ###### the header partials ####### -->
+    <%- include('partials/header.ejs'); %>
+ <!-- ########### header ends here ###### -->
+
+      <!--  crypto prices widget ################### -->
+      <div style=" background-color: #FFFFFF; overflow:hidden; box-sizing: border-box;  text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; padding:1px;padding: 0px; margin: 0px; width: 100%;"><div style=" padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=" width="100%" height="36px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;"></iframe></div></div>
+      <div class="jumbotron">
+          <img src="static/images/banner.jpg" width="100%" alt="bitcoin etherium and cryptocurrency" srcset="">
+        <div class="caption">
+            <button>Get started</button>
+        </div>
+      </div>
+      <!-- crypto-widget End ############### -->
+
+      <div class=" sign_up_register">
+            <button class="login"> Sign up</button>
+            <button class="register"> Register</button>
+      </div>
+<!--  About us section -->
+      <section class="home_section aboutUs">
+           <h2> WHO ARE WE ? <span class="myLgreen">US</span> </h2>
+          <span class="dash" data-aos="dash-active">
+          </span>
+          <div class="content">
+            We (Eightbit miners) are an Investment Platform that represents a low-risk, high-return investment for all comers - novice investors and professional players in the financial market. If you are familiar with the concepts of Forex and stock trading, you will undoubtedly be able to appreciate our work and its results.   
+        <small>...<a href="/about" class="myLgreen"> ReadMore</a></small> 
+        </div>
+      </section>
+      <!-- OUR SERVICES SECTION -->
+      <section class="home_section ourServices">
+         <h2> OUR SERVICES</span> </h2>
+        <span class="dash" data-aos="dash-active">
+        </span>
+        <div class="content ">
+            Why choose us
+        </div>
+      <ul class="services">
+          <li>
+                  <img src="static/images/wallet.png" alt="easily deposit to your crypto wallet / account" srcset="">
+                  <h3 class=" myLgreen"> EASY DEPOSIT</h3>
+                  <div class="content">
+                     invest your money with ease direct from your wallet, no need to leave the comfort of your home or bed 
+                  </div>
+          </li>
+            <li>
+                <img src="static/images/return_investment.png" class="services_return_img_" alt=" high interest return on investment" srcset="">
+                <h3 class=" myLgreen">INSTANT WITHDRAWAL </h3>
+                <div class="content">
+                    Withdrawals from your account are credited to your external wallet instantly from the time of your withdrawal
+                </div>
+        </li>
+        <li>
+            <img src="static/images/globe.png" class="services_globe_img_" alt=" we are acceptable all round the world/ globe" srcset="">
+            <h3 class=" myLgreen"> WORLD WIDE</h3>
+            <div class="content">
+                We are available world wide in all country's where cryto is accepted.
+            </div>
+        </li>
+        <li>
+            <img src="static/images/security.png" alt="security lock, your crypto is safe and secured" srcset="">
+            <h3 class=" myLgreen"> SECURE </h3>
+            <div class="content">
+                We use security checks such as Secure Sockets Layer(SSL) and 2FA authentication and since all transactions are carried out using crypto, your money is secured.
+            </div>
+        </li>
+        <li>
+            <img src="static/images/affiliate-referral.png" class="services_return_img_" alt=" referrals image" srcset="">
+            <h3 class=" myLgreen">REFFERAL SYSTEM </h3>
+            <div class="content">
+                We provide you 5% commission of your referral's deposits to your account balance. You request your funds that are available in your account balance, it will appear instantly into your payment account
+            </div>
+    </li>
+    <li>
+        <img src="static/images/fast-convenient-withdrawals.png" class="services_return_img_" alt="loaning money icon" srcset="">
+        <h3 class=" myLgreen"> LOANING SERVICE  </h3>
+        <div class="content">
+            One of the keys to being financially successful is understanding when loans are a good solution for your situation. Eight-bit gives you the opportunity to attend to urgent needs, grow businesses...
+        </div>
+</li>
+      </ul>
+    </section>
+    <div class="investment_header">
+        <div class="investment_banner">
+            <img src="static/images/investment_image.png" alt="" class="investment_image">
+            <!--  caption text motivationsal quotes -->
+            <!-- As seen on rogertalk.com -->
+            <section class="investment_carousel">
+                <div class="investment_carousel_relative">
+                    <div class="slide slide_active">
+                        <p> When you invest, you are buying a day you don't have to work </p>
+                        <div> Aya Laraya</div>
+                    </div>
+                    <div class="slide">
+                        <p> Don't work for money, make it work for you </p>
+                        <div> Robert Kiyosaki</div>
+                    </div>
+                    <div class="slide">
+                        <p> In investing, what is confortable is rarely profitable</p>
+                        <div> Robert Arnott</div>
+                    </div>
+                    <div class="slide">
+                        <p> Finding the best person or organization to invest your money is one of the most important financial decisions you'll ever make </p>
+                        <div> Bill Gross</div>
+                    </div>
+                    <div class="slide">
+                        <p> Do something today that your future self will thank you for </p>
+                        <div> Annonymous</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="investment_coinlib_widget">
+            <div style="height:450px; background-color: #FFFFFF; overflow:hidden; box-sizing: border-box; border: 1px solid #56667F;  text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #56667F;padding:1px;padding: 0px; margin: 0px; width: 100%;"><div style="height:540px; padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=chart&theme=light&coin_id=859&pref_coin_id=1505" width="100%" height="536px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;line-height:14px;"></iframe></div></div>
+        </div>
+    </div>
+
+<!-- ###### investment section #### -->
+<%- include("profile/partials/investmentplans.ejs") -%>
+
+<!--  #### contact us section ######## -->
+<%- include("partials/emailUs.ejs") -%>
+<!--  ####### section end####### -->
+
+    <section class="faq" id="faq">
+        <h2 class="faq_header">
+           <div>FREQUENTLY ASKED</div> 
+           <!-- this questions p tag is an inline element so this div is to push the p tag down -->
+            <p> QUESTIONS</p>
+        </h2>
+        <a href="#" id="scroll" style="display: none;"><span></span></a>
+        <ul>
+            <li class="faq_items">
+                <h3 class="faq_item_title">
+                   <span class="plus"> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffe25a" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg> </span>
+                    What does it mean to invest in cryptocurrency
+                </h3>
+                <p class="faq_item_content">
+                    Cryptocurrencies are digital assets people use as investments and for online purchases. You exchange real currency, like dollars, to buy “coins” or “tokens” of a certain kind of cryptocurrency. Be confident about your retirement
+                </p>
+            </li>
+            <li class="faq_items">
+                <h3 class="faq_item_title">
+                   <span class="plus"> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffe25a" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg> </span>
+                    How do i deposit
+                </h3>
+                <p class="faq_item_content">
+                    To deposit,you have to create an account with us,login to your dashboard and follow the easy steps to invest and earn as well. To start:  <a href="/register" >register</a>
+                </p>
+            </li>
+            <li class="faq_items">
+                <h3 class="faq_item_title">
+                   <span class="plus"> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffe25a" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg> </span>
+                   Am i Eligible for loan
+                </h3>
+                <p class="faq_item_content">
+                    For loan Eligibility, Go to your dash board to request.
+                </p>
+            </li>
+            <li class="faq_items">
+                <h3 class="faq_item_title">
+                   <span class="plus"> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffe25a" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg> </span>
+                    How Fast and secure is the Withdrawal
+                </h3>
+                <p class="faq_item_content">
+                    All withdrawal are instant and easy. All you need to do is to go to your user dashboard and click on the withdrawal request. Select the mode you want to be paid and your transaction will be processed imediately
+                </p>
+            </li>
+            <li class="faq_items">
+                <h3 class="faq_item_title">
+                   <span class="plus"> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffe25a" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg> </span>
+                    Can an investor withdraw daily ?
+                </h3>
+                <p class="faq_item_content">
+                    Time of withdrawal depends on the investment plan... Quickly go through our investment plan
+                </p>
+            </li>
+
+        </ul>
+    </section>
+    <section class="customer_reviews">
+        <div class="title">
+            <h2> INVESTORS REVIEWS</h2>
+            <span class="dash" data-aos="dash-active"></span>
+           
+        </div>
+        <div class="content">
+            <div class="item-card">
+                <div class="blockname">
+                    <div class="img_wrapper">
+                        <img src="static/images/review1.jpeg" width="70" height="70" alt="reviews by investors at eight-bit" srcset="">
+                    </div>
+
+                    <div class="name_wrap">
+                        <h3 class="mbr-fonts-style name display-3">
+                            <strong>Jena Smith</strong>
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="block">
+                    <p class="mbr-fonts-style  mbr-text card-text display-5">
+                       I still can't wrap my head around this, it is just unbelieveable. was skeptical at first then i decided to try it, after my first payment brooo,
+                       i had all my families registered with my referral Id... this is life changing
+                        <br>
+                    </p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="blockname">
+                    <div class="img_wrapper">
+                        <img src="static/images/review2.jpeg" width="70" height="70" alt="reviews by investors at eight-bit miners" srcset="">
+                    </div>
+
+                    <div class="name_wrap">
+                        <h3 class="mbr-fonts-style name display-3">
+                            <strong>Jena Smith</strong>
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="block">
+                    <p class="mbr-fonts-style  mbr-text card-text display-5">
+                        Even with little to no knowledge about trading, i know for a fact that there are traders who don't earn as much as i do from Eight-bit M, almost paid off
+                        all my student loans, i am grateful for the day i joined
+                        <br>
+                    </p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="blockname">
+                    <div class="img_wrapper">
+                        <img src="static/images/review4.jpeg" width="70" height="70" alt="reviews by investors at eight-bit" srcset="">
+                    </div>
+
+                    <div class="name_wrap">
+                        <h3 class="mbr-fonts-style name display-3">
+                            <strong>Michelle payne</strong>
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="block">
+                    <p class="mbr-fonts-style  mbr-text card-text display-5">
+                        My family and i want to thank you for helping us find a great opportunity to make money online, very happy with how things are going. thank you Eight-bit investment
+                        <br>
+                    </p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="blockname">
+                    <div class="img_wrapper">
+                        <img src="static/images/review3.jpeg" width="70" height="70" alt="reviews by investors at eight-bit" srcset="">
+                    </div>
+
+                    <div class="name_wrap">
+                        <h3 class="mbr-fonts-style name display-3">
+                            <strong>Jena Smith</strong>
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="block">
+                    <p class="mbr-fonts-style  mbr-text card-text display-5">
+                        A truely professional sercice and i don't hessitate to recommend it to anyone who is new to or looking for someone to help them trade
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  ###### FOOTER SECTION ##### -->
+        <%- include("./partials/footer.ejs") -%>
+    <!-- ######## FOOTER END ######## -->
+   <!-- <script src="static/bootstrap-5.0.2-dist/js/bootstrap.js"></script> -->
+
+   <script>
+
+    //  CALL ANIMATOINS
+        AOS.init({
+        once: true,
+        useClassNames: true
+    })
+
+    //    scroll to top function
+    const mybutton = document.getElementById("back_to_top")
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+    if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+    mybutton.onclick = ()=> window.scrollTo({top: 0, behavior: 'smooth'})
+}
+
+    //    FAQ drop down
+    let FAQ =  document.querySelectorAll(".faq_items")
+   FAQ.forEach(li=>{
+       li.addEventListener("click", function(e){
+           FAQ.forEach(faq=> faq!==li ? faq.classList.remove("active_faq"): null )
+           this.classList.toggle("active_faq")
+       })
+        // li.addEventListener("click", function(event){  
+        //     FAQ.forEach(faq=> faq!== title ? faq.classList.remove("rotate_faq"): null)
+        //     FAQ.forEach(faq=> faq !== title ? faq.nextElementSibling.classList.remove("active_faq"): null)
+        //     title.nextElementSibling.classList.toggle("active_faq")
+        //     title.classList.toggle("rotate_faq")
+        // })
+    })
+
+
+    // Investment carousel/ fade in
+   const slides =  Array.from(document.querySelectorAll(".investment_carousel .slide"))
+ 
+   console.log(slides)
+   setInterval(()=>{
+       let pos = slides.indexOf(slides.filter(slide=> slide.classList.contains("slide_active"))[0])
+       slides.forEach(slide=> slide.classList.remove("slide_active"))
+       setTimeout(()=>{
+        pos === slides.length - 1 ? 
+        slides[0].classList.add("slide_active") :
+        slides[pos + 1].classList.add("slide_active")
+       },500)
+    //    this timeout is so the fade-out doesnt clash with the fade in
+   },5000) 
+
+// £££££ API CALL
+// function assign(name,number,url){
+//     return(`
+// <div class="customer_reviews_card">
+//                 <div class="review_header">
+//                     <img src="${url}" alt="" srcset="">
+//                     <div class="details">
+//                         <p> <b>NAME :</b>${name}</p>
+//                         <p> <b>CONTACT: </b> ${number} </p>
+//                     </div>
+//                 </div>
+//                 <div class="review_body">
+//                     <span class="quote_marks left"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="quote-right" class="svg-inline--fa fa-quote-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"></path></svg></span>
+//                    <span class="review"> adipisicing elit. Repellendus numquam expedita assumenda molestiae laudantium accusamus dicta facilis totam minima eos.</span>
+//                     <span class="quote_marks right"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="quote-right" class="svg-inline--fa fa-quote-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"></path></svg></span>
+//                 </div>
+//             </div>
+// `)
+// }
+
+// fetch("https://randomuser.me/api/?results=10").then(datas=> datas.json()).then(datas=>{
+
+//      let Reviews = datas.results.map(person=>{
+//          name = person.name.first+" "+person.name.last
+//          number= person.phone
+//          url = person.picture.medium
+//          return assign(name,number,url)
+//      })
+//      Reviews.forEach(review=>{
+//      document.querySelector(".customer_reviews .content").innerHTML+= review
+//      })
+//     })
+
+
+
+
+// observing first target element
+</script>
+</body>
+</html>

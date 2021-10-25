@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/css/profile/argon.css" type="text/css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap" rel="stylesheet">
+  <style>
+      *{
+          padding: 0;
+          margin: 0;
+      }
+    body{
+      background-image: url("/static/images/lil_baby.png");
+      background-position:center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Carrois Gothic', sans-serif;
+    }
+    form{
+        max-width: 450px;
+        background-color: black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- modal section is here -->
+<!--  message flash error to show that there was a success -->
+
+<%- include("partials/nav.ejs") -%>
+    <!-- Header -->
+    <div class="header  mb-3">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-dark d-inline-block mb-0 text-white"> <%= admin.username %></h6>
+            </div>
+            <div class="col-12">
+            </div>
+            
+          </div>
+          <div class="col-lg-7 col-12 py-2 bg-white">
+            <h5 class="text-dark d-inline-block mb-0  text-light"><b class="h4"> BTC  :  </b> <%= admin.account.btc %></h6>
+          </div>
+          <div class="col-lg-7 col-12 py-2 bg-white">
+            <h5 class="text-dark d-inline-block mb-0  text-light"><b class="h4">Etherium  :  </b> <%= admin.account.etherium %></h6>
+          </div>
+          <div class="col-lg-7 col-12 py-2 bg-white">
+            <h5 class="text-dark d-inline-block mb-0  text-light"><b class="h4">perfect Money  :  </b> <%= admin.account.perfectM %></h6>
+          </div>
+     </div>
+    </div>
+</div>
+ 
+ <form class="p-3 mt-5 mx-auto my-5" method="POST">
+    <div class="form_header form-group">
+        <h2 class="text-white text-center text-uppercase"> Update Account Details</h2>
+    </div>
+        <div class=" mb-3">
+            <select name="gateWay" class="form-select form-control">
+                <option selected value=""> Open this select menu</option>
+                <option value="btc">bitcoin</option>
+                <option value="etherium"> Etherium</option>
+                <option value="perfectM"> Perfect Money</option>
+              </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail211" class="form-label"> Address</label>
+            <div class=" mb-3">
+              <input type="text" class="form-control" name="address" required id="exampleInputEmail211" autocomplete="new-password" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary d-block mx-auto">Update</button> 
+ </form>
+
+ <script>
+     const form = document.querySelector("form")
+     form.addEventListener("submit", function(e){
+         e.preventDefault()
+         if(form.gateWay && form.address){
+             form.submit()
+         }
+     })
+ </script>
+<%- include("./partials/footer.ejs") -%>

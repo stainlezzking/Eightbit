@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" href="static/images/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="static/css/profile/argon.css" type="text/css">
+</head>
+
+<body>
+  <% const sort = (x, y) => (x.paid === y.paid)? 0 : x.paid? 1 : -1; %>
+  <% const {user} = variables %>
+  <% user.account.invest.length ?  lastInvestment = user.account.invest.filter(invest=> invest.sort == (user.account.invest.length))[0] : lastInvestment ={profit: 0.00, amount : 0.00, rate : 100} %>
+  <% user.account.withdrawals.length ?  lastWithdrawal = user.account.withdrawals[user.account.withdrawals.length - 1] : lastWithdrawal =  {amount : 0.00} %>
+
+<%- include("partials/nav.ejs") -%>
+    <!-- Header -->
+    <div class="header  pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-dark d-inline-block mb-0"> <%= user.name %></h6>
+            </div>
+          
+          </div>
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0"> Wallet ballance</h5>
+                      <span class="h2 font-weight-bold mb-0"> <b>$ </b> <%= user.account.ballance.toLocaleString("en-US") %></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="fas fa-wallet"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Total available ballance</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Last investment</h5>
+                      <span class="h2 font-weight-bold mb-0"><b> $</b> <%= lastInvestment.amount.toLocaleString("en-US") %></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="fas fa-chart-bar"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> <%= parseFloat((lastInvestment.amount/user.account.ballance)*100).toFixed(2) || 100 %> %</span>
+                    <span class="text-nowrap">last investment</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Last Withdrawal</h5>
+                      <span class="h2 font-weight-bold mb-0"> <b>$ </b><%= lastWithdrawal.amount.toLocaleString("en-US") %></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="fas fa-money-check-alt"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> <%= lastWithdrawal.status %></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">  Expected Profit</h5>
+                      <span class="h2 font-weight-bold mb-0"><b>$ </b> <%= lastInvestment.profit.toLocaleString("en-US") %></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                        <i class="fas fa-hand-holding-usd"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> <%= lastInvestment.rate %> % </span>
+                    <span class="text-nowrap">Since last investment</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container mb-5">
+      <div class="header">
+          <h3 class="text-primary text-uppercase pb-3">All investments</h3>
+      </div>
+    <ul class="body_details list-group  px-0 mx-0" role="button">
+      <% if(user.account.invest.length){ %>
+       <!-- sort by completet -->
+      <li class="account list-group-item check_details d-flex  justify-content-between align-items-center bg-purple"  role="button">
+        <h4 class="account_username mb-0">
+          $ Total
+        </h4>
+        <p class="mb-0" class="amount">status</p>
+        <p class="mb-0" class="date">  Due Date</p> 
+      </li>
+       <%  user.account.invest.sort(sort).forEach(investment=>{ %>
+             <% due =  Number(new Date().getTime()) > Number(investment.expiry.getTime()) %>
+           <%  className = investment.paid ? "bg-success" : "" ; %> 
+         <li class="account list-group-item check_details d-flex <%=className %> justify-content-between align-items-center" style="cursor: pointer;" role="button">
+           <h4 class="account_username mb-0">
+             $ <%= investment.profit + investment.amount %>
+           </h4>
+           <% console.log("this is the paid value " + investment.paid) %>
+          <% if(!investment.paid){ %>
+             <%# if investment has not been paid to investor #%>
+          <%  if(due){ %>
+            <%# if investment is due to be paid #%>
+            <p class="mb-0" class="amount fw-bold text-white"> Due </p>
+              <form method="POST" action="dashboard/<%= investment._id %>">
+                <input type="hidden" name="ballance" value="<%= user.account.ballance %>">
+                <input type="hidden" name="amount" value="<%= investment.amount %>">
+                <input type="hidden" name="profit" value="<%= investment.profit %>">
+                <button type="submit" class="btn btn-success"> cash </button>
+              </form>
+          <%  }else{ %>
+            <%# if investment due date has reached, cashout #%>
+            <p class="mb-0" class="amount"><%= investment.status %> </p>
+            <p class="mb-0" class="date"> <%= investment.expiry.toLocaleDateString() %></p> 
+         <%   } %>
+       <%    }else{ %>
+            <%# if investment has been  paid to investor #%>
+            <p class="mb-0" class="date"> cashed </p> 
+         <%  } %>
+
+       </li>
+    <%   }) %>
+       <% }else{ %>
+         <li class="account list-group-item check_details d-flex justify-content-between align-items-center" role="button">
+           <h4 class="account_username mb-0">
+             You have no investments
+           </h4>
+         </li>
+     <%  } %>
+       </ul>
+  </div>
+    <!--  scripts -->
+    <%- include("partials/closing") -%>

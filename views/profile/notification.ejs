@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Your notifications</title>
+  <!-- Favicon -->
+  <link rel="icon" href="static/images/favicon.png" type="image/png">
+  <!-- BOOTSTRAP this upload is to style the form -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+  <!-- Icons -->
+  <link rel="stylesheet" href="static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="static/css/profile/argon.css" type="text/css">
+  <style>
+      tr{
+          cursor: pointer;
+      }
+  </style>
+</head>
+<!-- modal section -->
+<%- include("partials/modal.ejs") -%>
+<!-- ££££££ -->
+
+<!-- sort function -->
+<% const sort = (x, y) => (x.viewed === y.viewed)? 0 : x.viewed? 1 : -1; %>
+
+<!-- sort function end -->
+
+<!--  NAV HEADER HERE -->
+<%- include("partials/nav.ejs") -%>
+<!-- NAV ENDING -->
+      <% var {user} = variables %>
+      <% var unviewed = user.notifications.filter(infos => !infos.viewed) %>
+    <!--DEPOSIT HISTORY SECTION -->
+    <div class="header pb-6">
+        <div class="container-fluid">
+          <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Notifications</h6>
+              </div>
+            </div>
+               <!-- ####### History table ######## -->
+            <table class="table bg-white shadow-sm rounded">
+                    <thead>
+                        <tr>
+                          <th scope="col" colspan="2"> you have <%= unviewed.length %> new notifications</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if(user.notifications.length){ %>
+                       <% user.notifications.sort(sort).forEach((message,index)=>{ %>
+                        <% className = message.viewed ? "bg-light" : "" %>
+                          <tr class="<%=className%>" data-target="aa<%= message._id %>">
+                            <th scope="row"> <%= index + 1 %></th>
+                            <td> <%= message.title %></td>
+                            <p style="visibility: hidden;" id="aa<%= message._id %>" data-value="<%= message.body %>">
+                          </tr>
+                       <% }) %>
+                    <%  }else{ %>
+                        <tr data-target="two">
+                          <th scope="row">#</th>
+                          <td class="text-light"> no notifications </td>
+                        </tr>
+                    <%  } %>
+                </tbody>
+             </table>
+          </div>
+        </div>
+      </div>
+<script>
+           document.querySelector('.modal button').innerHTML = ""
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+            var message = ""
+             var title = "notification"
+
+    document.querySelectorAll("table tr").forEach(row=>{
+        row.addEventListener("click", function(e){
+            message= document.querySelector(`p#${row.getAttribute("data-target")}`).getAttribute("data-value") 
+            document.querySelector('.modal-body').innerText = message
+            document.querySelector('.modal-title').innerText = title
+            myModal.show()
+            fetch("/notifications/viewed/"+row.getAttribute("data-target").slice(2))
+            .then(data=> console.log(data))
+            .catch(err=> console.log(err))
+        })
+    })
+</script>
+<!-- FOOTER START -->
+<%- include("partials/closing.ejs") -%>
+<!-- ######## -->

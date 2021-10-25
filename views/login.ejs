@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sign into your account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="static/images/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            height: 100vh;
+            background-color: #0e6cc4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background:rgba(245, 245, 245, 0.44);
+            box-shadow: 3px 3px 10px 0px black;
+            padding: 3rem 1rem;
+            position: relative;
+        } 
+        .auth_spinner {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ffffff;
+            border-top-color: rgba(255,255,255,0.3);
+            border-radius: 100%;
+            left: 50%;
+            top: 0;
+            opacity: 1;
+            margin-left: -20px;
+            margin-top: -20px;
+            animation: spinner 0.6s infinite linear;
+            transition: top 0.3s 0.3s ease,
+                        opacity 0.3s 0.3s ease,
+                        border-radius 0.3s ease;
+            box-shadow: 0px 1px 0px rgba(0,0,0,0.2);
+         }
+        @keyframes spinner {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(359deg); }
+        }
+        .cover{
+            position: absolute;
+            background-color: rgba(0, 45, 128, 0.631);
+            max-height: 0px;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: max-height 2.5s ease-in-out;
+            bottom: 0;
+            left: 0;
+        }
+        /*  waves animation */
+        
+        .cover_up{
+            max-height: 10000px;
+        }
+.box {
+	position: fixed;
+	top: 0;
+	transform: rotate(80deg);
+	left: 0;
+}
+
+.wave {
+	position: fixed;
+	top: 0;
+	left: 0;
+  opacity: .4;
+  position: absolute;
+  top: 3%;
+  left: 10%;
+  background: white;
+  width: 1500px;
+  height: 1300px;
+  margin-left: -150px;
+  margin-top: -250px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 7000ms infinite linear;
+}
+
+.wave.-three {
+  animation: drift 7500ms infinite linear;
+	position: fixed;
+	background-color: green;
+}
+
+.wave.-two {
+  animation: drift 3000ms infinite linear;
+  opacity: .1;
+  background: yellow;
+	position: fixed;
+}
+
+.box:after {
+  content: '';
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+/*LOADING SPACE*/
+
+.contain {
+	animation-delay: 4s;
+	z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  background: #25a7d7;
+  background: -webkit-linear-gradient(#25a7d7, #2962FF);
+  background: linear-gradient(#25a7d7, #25a7d7);
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 5px;
+}
+
+/*Animation*/
+.icon:nth-child(2) img {-webkit-animation-delay: 0.2s;animation-delay: 0.2s}
+.icon:nth-child(3) img {-webkit-animation-delay: 0.3s;animation-delay: 0.3s}
+.icon:nth-child(4) img {-webkit-animation-delay: 0.4s;animation-delay: 0.4s}
+
+.icon img {
+  -webkit-animation: anim 2s ease infinite;
+  animation: anim 2s ease infinite;
+  -webkit-transform: scale(0,0) rotateZ(180deg);
+  transform: scale(0,0) rotateZ(180deg);
+}
+
+@-webkit-keyframes anim{
+  0% {
+    -webkit-transform: scale(0,0) rotateZ(-90deg);
+    transform: scale(0,0) rotateZ(-90deg);opacity:0
+  }
+  30% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);
+    transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  50% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);
+    transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  80% {
+    -webkit-transform: scale(0,0) rotateZ(90deg);
+    transform: scale(0,0) rotateZ(90deg);opacity:0
+  }
+}
+
+@keyframes anim{
+  0% {
+    -webkit-transform: scale(0,0) rotateZ(-90deg);
+    transform: scale(0,0) rotateZ(-90deg);opacity:0
+  }
+  30% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  50% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);
+    transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  80% {
+    -webkit-transform: scale(0,0) rotateZ(90deg);
+    transform: scale(0,0) rotateZ(90deg);opacity:0
+  }
+}
+    </style>
+</head>
+<body>
+  <%# i think its express flash that is passing in this messages object #%>
+   <% if(messages.error){ %>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+             Confirm your inputs and try again
+          </h5>
+        <button type="button" class="btn-close text-warning"  style="border:none;" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times " ></i>
+        </button>
+      </div>
+      <div class="modal-body">
+      <%= messages.error %>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+<script>
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+    myModal.show()
+</script>
+
+  
+  <%  } %>
+    <div class='box'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
+      </div>
+    <div class="container">
+        <div class="brand">
+            <h2 class="display-2 text-success fw-bold text-center pb-3">
+               <a href="/"> <img style="width: 50px;" src="static/images/favicon.png" alt="Eight-bit investment logo and a link back to home page" srcset=""></a> Login </h2>
+        </div>
+        <form class="form" method="POST" >
+            <div class="form-floating mb-3">
+                <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Your Username">
+                <label for="floatingInput"> Your Username</label>
+              </div>
+              <div class="form-floating">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+              <button type="submit" class="btn btn-outline-success btn-md d-block mx-auto my-4">Log in</button>
+        </form>
+        <div class="py-3 text-end fw-bold" style="font-size: .7rem;">don't have an account with us ? <a href="/register">Create an account</a></div>
+        <div class="cover">
+            <div class="auth_spinner"></div>
+            <div class="message text-white mt-4 text-uppercase"> Aunthenticating</div>
+        </div>
+    </div>
+    <script>
+        //Remember to link up forgot your password
+        document.forms[0].addEventListener("submit", function(event){
+            event.preventDefault()
+            document.querySelector(".cover").classList.add("cover_up")
+            setTimeout(() => {
+                document.forms[0].submit()
+            }, 2000);
+        })
+    </script>
+</body>
+</html>

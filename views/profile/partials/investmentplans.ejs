@@ -1,0 +1,38 @@
+<section class="investment">
+    <div class="investment_title">
+        <h2> OUR INVESTMENT PLAN</h2>
+        <span class="dash" data-aos="dash-active"></span>
+    </div>
+
+        <%# function to sort deposits by the by sort which is basically date #%>
+    <% function sortFunction(itemA,itemB){ %>
+    <% if(itemA.max < itemB.max){ return -1} %>
+    <% if(itemA.max > itemB.max){ return 1} %>
+    <% return 0 %>
+    <% } %>
+
+    <% if(investments.length){ %>
+        <% investments.sort(sortFunction).forEach(investment=>{ %>
+            <form action="/invest/<%= investment._id %>" method="POST" class="card">
+                <h3> <%= investment.title %> </h3>
+                <div class="card_body">
+                    <p class="min">  $<%= investment.min.toLocaleString("en-US") %> <small>(min)</small></p>         
+                    <p class="max">  $<%= investment.max.toLocaleString("en-US") %> <small class="myLgreen">(max)</small></p>    
+                    <div class="content">
+                        <p><i> RIO - <%= investment.rate %> <span>% </span>daily</i></p>
+                        <p><i>Duration <%= investment.duration %> days</i> </p>
+                        <% if(show){ %>
+                            <div class="form-group">
+                                <input type="Number" class="form-control" name="amount">
+                            </div>
+                        <%  } %>
+                        <button  type="submit"> INVEST</button>
+                    </div>     
+                </div>
+            </form>
+       <% }) %>
+  <% }else{ %>
+<h2> No investments plans available at the moment, check back soon</h2>
+ <% } %>
+
+</section>

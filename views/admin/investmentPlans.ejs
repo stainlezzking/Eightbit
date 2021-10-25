@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/css/profile/argon.css" type="text/css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap" rel="stylesheet">
+  <style>
+      *{
+          padding: 0;
+          margin: 0;
+      }
+    body{
+      background-image: url("/static/images/lil_baby.png");
+      background-position:center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Carrois Gothic', sans-serif;
+
+    }
+    .card{
+        background-color: black;
+        box-shadow: 2px 0px 15px 0px black;
+        max-width: 300px;
+    }
+    .card h2 {
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        text-transform: uppercase;
+    }
+    .rate {
+        padding: 1.4rem;
+        text-align: center;
+        font-size: 1.8rem;
+        background-color: rgb(194, 190, 190);
+        margin: 1rem 0;
+        color: greenyellow;
+        font-style: italic;
+    }
+    .details { 
+        padding: 1rem;
+        text-align: center;
+    }
+    form{
+        max-width: 400px;
+        background-color: black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- modal section is here -->
+<!--  message flash error to show that there was a success -->
+
+<%- include("partials/nav.ejs") -%>
+    <!-- Header -->
+    <div class="header  mb-3">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-dark d-inline-block mb-0 text-white"> <%= admin.username %></h6>
+            </div>
+          
+          </div>
+     </div>
+    </div>
+</div>
+ <div class="header_body ">
+  <%# function to sort deposits by the by sort which is basically date #%>
+  <% function sortFunction(itemA,itemB){ %>
+  <% if(itemA.max < itemB.max){ return -1} %>
+  <% if(itemA.max > itemB.max){ return 1} %>
+  <% return 0 %>
+  <% } %>
+     <!-- check if plans less than 3 before delete, if yes then no -->
+    <% if(admin.investmentPlans.length){ %>
+      <% admin.investmentPlans.sort(sortFunction).forEach(investment=>{ %>
+        <form method="POST" action="/admin/delete/<%=investment._id%>" class="card mx-auto">
+          <div class="card_header">
+              <h2 class="card_title pt-4">
+                  <%= investment.title %>
+              </h2>
+              <div class="rate text-primary" >
+                  <%= investment.rate %> %
+              </div>
+              <div class="details">
+                 <h2 class="min">  $ <%= investment.min.toLocaleString("en-US") %> <small>(min)</small></h2>         
+                 <h2 class="max">  $ <%= investment.max.toLocaleString("en-US") %>  <small class="myLgreen">(max)</small></h2>    
+                 <p><i>Duration - <%= investment.duration %> days</i> </p>
+                 <button  type="submit" class="btn btn-danger"> delete</button>
+             </div>  
+          </div>
+     </form>
+     <%  }) %>
+    <% }else{ %>
+      <section class="jumbotron">
+        <h2> For some reason you have no investemt plans</h2>
+      </section>
+   <% } %>
+
+ </div>
+ 
+ <form class="p-3 mt-5 mx-auto my-2" method="POST">
+    <div class="form_header form-group">
+        <h2 class="text-white text-center text-uppercase"> new investment plan</h2>
+    </div>
+        <div class=" mb-3">
+          <label for="exampleInputEmail1" class="form-label">Title</label>
+          <input type="text" class="form-control" name="title" required id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <label for="exampleInputEmail2" class="form-label">Rate</label>
+        <div class=" input-group mb-3">
+          <input type="Number"name="rate" class="form-control" id="exampleInputEmail2" required aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-text">%</span>
+          </div>
+
+          <label for="min" class="form-label">min</label>
+          <div class=" input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control" name="min" id="min" required aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-text">(min)</span>
+            </div>
+            <label for="max" class="form-label">max</label>
+            <div class=" input-group mb-3">
+            <span class="input-group-text">$</span>
+                <input type="text" name="max" class="form-control" id="max" required aria-label="Amount (to the nearest dollar)">
+                  <span class="input-group-text">(max)</span>
+            </div>
+            <label for="exampleInputEmail211" class="form-label"> Duration</label>
+            <div class=" mb-3 input-group">
+              <input type="Number" class="form-control" name="duration" required id="exampleInputEmail211" aria-describedby="emailHelp">
+              <span class="input-group-text">Days</span>
+            </div>
+        <button type="submit" class="btn btn-primary d-block mx-auto">Submit</button>
+      
+ </form>
+
+<%- include("./partials/footer.ejs") -%>

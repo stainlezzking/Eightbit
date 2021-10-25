@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content=" Start building your future with the best investment plaform out there">
+  <meta name="author" content="Eight-bit CEO firm investment">
+  <title> Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/css/fontawesome/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/css/profile/argon.css" type="text/css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap" rel="stylesheet">
+  <style>
+      *{
+          padding: 0;
+          margin: 0;
+      }
+    body{
+      background-image: url("/static/images/lil_baby.png");
+      background-position:center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Carrois Gothic', sans-serif;
+    }
+    form{
+        max-width: 400px;
+        background-color: black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- modal section is here -->
+<!--  message flash error to show that there was a success -->
+
+<%- include("partials/nav.ejs") -%>
+    <!-- Header -->
+    <div class="header  mb-3">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-dark d-inline-block mb-0 text-white"> username </h6>
+            </div>
+          
+          </div>
+     </div>
+    </div>
+</div>
+
+ <form  class="p-3 mt-5 mx-auto my-2" method="POST">
+    <div class="form_header form-group">
+        <h2 class="text-white text-center text-uppercase"> Message an Investor</h2>
+    </div>
+    <div class="mb-3">
+      <select class="form-select form-select-lg mb-3 form-control" name="username" required aria-label=".form-select-lg example">
+        <% if(users.length){ %>
+          <option selected value="">Username </option>
+          <%  users.forEach(user=>{ %>
+              <option value="<%= user.username %>"> <%= user.username %></option>
+          <%  }) %>
+       <%   }else{ %>
+        <option selected value="">You have no investors</option>
+      <% } %>
+      </select>
+      </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"> Title Request</label>
+        <input type="text" class="form-control" required name="title" id="exampleFormControlInput1">
+      </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Body of request</label>
+        <textarea class="form-control" name="body" required id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+        <button type="submit" class="btn btn-primary d-block mx-auto">Submit</button>
+      
+ </form>
+
+<%- include("./partials/footer.ejs") -%>
