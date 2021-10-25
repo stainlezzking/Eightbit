@@ -112,7 +112,7 @@
               <p class="mb-0" id="amount"> <%= slip.amount %> </p>
               <p class="mb-0" id="date"> <%= slip.created_at.toLocaleDateString() %></p>
               <div class="account_details" style="display: none;">
-                <input type="hidden" name="imageBlob" value="<%= slip.imageBlob.toString(base64) %>">
+                <input type="hidden" name="imageBlob" value="data:<%= slip.mimeType %>;charset=utf-8;base64,<%= slip.imageBlob.toString(base64) %> %>">
                 <input type="hidden" name="mimeType" class="mimtype" value="<%=slip.mimeType %>">
                 <input type="hidden" name="username" value="<%= slip.username %>">
                 <input type="hidden" name="identifier" value="<%= slip.identifier %>">
@@ -139,12 +139,12 @@
       detail.querySelector(".confirmed").value == "true" ? document.querySelector("#confirmed span").innerHTML = "confirmed" : "not confirmed";
       detail.querySelector(".confirmed").value == "true" ? document.querySelector("#confirmButton").classList.add("d-none") : document.querySelector("#confirmButton").classList.remove("d-none");
       detail.querySelectorAll(".account_details input").forEach(input=>{
-          let src = "data:"+detail.querySelector(".mimtype").value+";charset=utf-8;base64,"+detail.querySelector("input").value
+          let src = detail.querySelector("input").value
           input.name == "username" ? document.querySelector("#user_name").innerText = input.value : false;
           input.name == "username" ? document.querySelector("#_username").value = input.value : false;
           input.name == "amount" ? document.querySelector("#_amount").innerText = input.value : false;
           input.name == "identifier" ? document.querySelector("#identifier").value = input.value : false;
-          input.name == "imageBlob" ? document.querySelector("#myModal img").setAttribute("src", src+input.value): false;
+          input.name == "imageBlob" ? document.querySelector("#myModal img").setAttribute("src", src): false;
         myModal.show()
       })
     })

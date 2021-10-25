@@ -520,11 +520,6 @@ app.post("/admin/account", function(req,res){
                 .then(data=> res.redirect("/admin/account"))
                 .catch(err=> console.log("an error occured ", err))
             }
-            else if(req.body.gateWay === "perfectM"){
-                return adminCollection.updateOne({username :process.env.DB_ADMIN_USER},{"account.perfectM": req.body.address})
-                .then(data=> res.redirect("/admin/account"))
-                .catch(err=> console.log("an error occured ", err))
-            }
             res.send("<h1>Seems you put a payment means that is not recognized </h1>")
               
         }
