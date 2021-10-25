@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 })
 
 limits = {
-    fileSize: 200000
+    fileSize: 2000000
 }
 
 function fileFilter(req,file, cb){
