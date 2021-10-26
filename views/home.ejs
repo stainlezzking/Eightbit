@@ -28,14 +28,14 @@
       <div class="jumbotron">
           <img src="static/images/banner.jpg" width="100%" alt="bitcoin etherium and cryptocurrency" srcset="">
         <div class="caption">
-            <button>Get started</button>
+            <a class="btn"  href="/register">Get started</a>
         </div>
       </div>
       <!-- crypto-widget End ############### -->
 
       <div class=" sign_up_register">
-            <button class="login"> Sign up</button>
-            <button class="register"> Register</button>
+            <a class="login btn" href="/login"> Sign up</a>
+            <a class="register btn" href="/register"> Register</a>
       </div>
 <!--  About us section -->
       <section class="home_section aboutUs">
@@ -213,7 +213,7 @@
 
                     <div class="name_wrap">
                         <h3 class="mbr-fonts-style name display-3">
-                            <strong>Jena Smith</strong>
+                            <strong>Ryan Chase</strong>
                         </h3>
                     </div>
 
@@ -278,7 +278,7 @@
 
                     <div class="name_wrap">
                         <h3 class="mbr-fonts-style name display-3">
-                            <strong>Jena Smith</strong>
+                            <strong> Phillip</strong>
                         </h3>
                     </div>
 
@@ -326,12 +326,7 @@
            FAQ.forEach(faq=> faq!==li ? faq.classList.remove("active_faq"): null )
            this.classList.toggle("active_faq")
        })
-        // li.addEventListener("click", function(event){  
-        //     FAQ.forEach(faq=> faq!== title ? faq.classList.remove("rotate_faq"): null)
-        //     FAQ.forEach(faq=> faq !== title ? faq.nextElementSibling.classList.remove("active_faq"): null)
-        //     title.nextElementSibling.classList.toggle("active_faq")
-        //     title.classList.toggle("rotate_faq")
-        // })
+
     })
 
 
@@ -350,38 +345,6 @@
     //    this timeout is so the fade-out doesnt clash with the fade in
    },5000) 
 
-// £££££ API CALL
-// function assign(name,number,url){
-//     return(`
-// <div class="customer_reviews_card">
-//                 <div class="review_header">
-//                     <img src="${url}" alt="" srcset="">
-//                     <div class="details">
-//                         <p> <b>NAME :</b>${name}</p>
-//                         <p> <b>CONTACT: </b> ${number} </p>
-//                     </div>
-//                 </div>
-//                 <div class="review_body">
-//                     <span class="quote_marks left"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="quote-right" class="svg-inline--fa fa-quote-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"></path></svg></span>
-//                    <span class="review"> adipisicing elit. Repellendus numquam expedita assumenda molestiae laudantium accusamus dicta facilis totam minima eos.</span>
-//                     <span class="quote_marks right"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="quote-right" class="svg-inline--fa fa-quote-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"></path></svg></span>
-//                 </div>
-//             </div>
-// `)
-// }
-
-// fetch("https://randomuser.me/api/?results=10").then(datas=> datas.json()).then(datas=>{
-
-//      let Reviews = datas.results.map(person=>{
-//          name = person.name.first+" "+person.name.last
-//          number= person.phone
-//          url = person.picture.medium
-//          return assign(name,number,url)
-//      })
-//      Reviews.forEach(review=>{
-//      document.querySelector(".customer_reviews .content").innerHTML+= review
-//      })
-//     })
 
 
 

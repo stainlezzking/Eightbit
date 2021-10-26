@@ -14,12 +14,12 @@
     <% if(investments.length){ %>
         <% investments.sort(sortFunction).forEach(investment=>{ %>
             <form action="/invest/<%= investment._id %>" method="POST" class="card">
-                <h3> <%= investment.title %> </h3>
+                <h3 style="text-transform: uppercase; padding-bottom: .8rem;"> <%= investment.title %> </h3>
                 <div class="card_body">
                     <p class="min">  $<%= investment.min.toLocaleString("en-US") %> <small>(min)</small></p>         
                     <p class="max">  $<%= investment.max.toLocaleString("en-US") %> <small class="myLgreen">(max)</small></p>    
                     <div class="content">
-                        <p><i> RIO - <%= investment.rate %> <span>% </span>daily</i></p>
+                        <p><i> ROI - <%= investment.rate %> <span>% </span>daily</i></p>
                         <p><i>Duration <%= investment.duration %> days</i> </p>
                         <% if(show){ %>
                             <div class="form-group">
