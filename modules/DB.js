@@ -193,6 +193,13 @@ function saveNewUser(req,res,next){
      skeleton = {
          ...user,
          referralId : md5(user.username),
+         notifications : [
+             {
+                 title : "Click to view message",
+                 body : " Welcome To Eightbit-miners investment platform, we are happy to accompany you on your journey to financial freedom, please note that this notification is how we reach you if we don't use the convetional email, so keep an eye on your notification",
+                 viewed : false
+             }
+         ],
          ipInfo : {
              ...user,  
          }
@@ -225,6 +232,7 @@ function saveNewUser(req,res,next){
      })
    
 }
+
 function checkBallance(req,res,next){
     const {amount, gateWay} = req.body
     investors.findOne({username: req.user.username}, function(err,data){

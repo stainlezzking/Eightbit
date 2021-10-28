@@ -271,6 +271,7 @@ app.post("/invest/:planId",cyclePlans, function(req,res){
         res.redirect("/invest")
 })
 
+
 app.post("/confirm", function(req,res){
 
        return upload(req, res, function (err) {

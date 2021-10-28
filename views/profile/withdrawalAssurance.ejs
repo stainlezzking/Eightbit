@@ -25,34 +25,20 @@
         }
     </style>
 </head>
-<body >
+<body>
     <div class="container px-0 ">
         <div class="header bg-light mx-auto py-4 px-3 mb-3">
             <h2 class="text-center"> EIGHT-BIT INVESTMENT WITHDRAWAL REQUEST </h2>
         </div>
    
             <div class="body px-3 py-5 bg-white ">
-                  Hello <%= user.username %>  Your Request to withdraw <%= amount %> from your Eight-bit wallet has been received and is being processed
+                  Hello <%= user.username %>  Your Request to withdraw $<%= amount %> from your Eight-bit wallet has been received and is being processed
                     <p class="mt-2"> we would confirm your payment within 24 hours, please keep checking your email for our response (you might have to check your spam folder) </p>
                     <div class="whole_footer text-center pt-5">
                         Copyright &copy; Eight-bit 2015 - 2022
                      </div>
-                </div>
-            
-            </div>        
-      <!-- 
-            <div class="body px-3 py-5 bg-white ">
-                It seems you have not completed your KYC verification, we are sorry for the inconvenience, but you have to verify your account before proceeding to withdrawal
-                <a href="/kyc" class="btn btn-primary"> KYC verification</a>
-                <div class="whole_footer text-center pt-5 ">
-                    Copyright &copy; Eight-bit 2015 - 2022
-                 </div>
-            </div>
-
-        </div>  
-      <%  -->
-       
-    </div>
+            </div>    
+ </div>        
     <script>
         function copyFunction(){
             var copyTxt = document.getElementById("address");
