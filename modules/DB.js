@@ -5,8 +5,7 @@ const countryList = require('country-list')
 const md5 = require("md5")
 
 
-mongoose.connect(" mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@todotest.pephm.mongodb.net/"+process.env.DB_DB+"?retryWrites=true&w=majority")
-
+mongoose.connect("mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@todotest.pephm.mongodb.net/"+process.env.DB_DB+"?retryWrites=true&w=majority")
 const schema = new mongoose.Schema ({
     name :{
         type : String,

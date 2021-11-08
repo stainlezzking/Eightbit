@@ -42,7 +42,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/admin/request">
                 <i class="fas fa-wallet text-orange"></i>
-                <span class="nav-link-text text-dark">Requests</span>
+                <span class="nav-link-text text-dark">Requests
+                <% var unresolved = admin.requests.filter(infos => !infos.resolved) %>
+                 <% if(unresolved.length){ %>
+                    <span class="alert bg-success text-white" style="border-radius:50%; padding: 1.5px 5px;"> <%= unresolved.length %> </span>
+                 <% } %>
+                </span>
                 <!-- you need a badge element here -->
               </a>
             </li>
@@ -50,6 +55,12 @@
               <a class="nav-link" href="/admin/support">
                 <i class="fas fa-sms text-success"></i>
                 <span class="nav-link-text text-dark">Support</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/contactus">
+                <i class="fas fa-envelope-square text-success"></i>
+                <span class="nav-link-text text-dark">Contact us</span>
               </a>
             </li>
             <li class="nav-item">
@@ -101,7 +112,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center flex-lg-row-reverse">
                  <div class="media-body  mx-2 d-lg-block">
-                        <span class="mb-0 text-sm  font-weight-bold"> abcd </span>
+                        <span class="mb-0 text-sm  font-weight-bold"> <%= admin.username %> </span>
                   </div>
                   <span class="avatar avatar-sm rounded-circle">
                     <i class="far fa-user"></i>
