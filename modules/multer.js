@@ -2,6 +2,7 @@ const path = require("path")
 const {confirmCollection, depositHistory} = require("./DB.js")
 const multer = require("multer")
 const fs = require("fs")
+const {SendEmail} = require("./automate-email")
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -45,13 +46,32 @@ function storeAndredirect(req,res){
          return res.redirect("/confirm")
       }if(success){
           depositHistory(req.user,req.body.amount,doc.identifier).then(data=>{
+            // send email to customer from here that there deposit is awaiting confirmation
               req.flash("error", "your file was successfully received. we will update your ballance after validation")
+              html =`
+              <body>
+              <div style="text-align: center; padding:10px 20px;">
+                <h2> Hey ${req.user.name}</h2>
+                <p> Your deposit of </p>
+                <h3 style="font-weight: bold;"> $${req.body.amount}</h3>
+                <p> Status : <span style="color: red" > Pending </span></p>
+                <div stylre="text-align: center; padding: 20px;"> 
+                <img width="150px" height="150px" src="https://www.eightbit-miners.com/static/images/favicon.png" />
+                </div>
+                <p style="margin-bottom: 20px;"> Has been received and awaiting confirmation, your account will be updated in 24 hours</p>
+                <p>
+                visit your   <a href="https://www.eightbit-miners.com/dashboard" >account </a>
+              </p>
+              </div>
+            </body>
+              `
+              SendEmail(req.user.email, html , "Your Deposit of $"+ req.body.amount + " awaiting confirmation")
+              .catch(err => err ? console.log("an error occured trrrying to send email in confirmaCollection fxn") : console.log("successfully sent email"))
               return res.redirect("/confirm")
           })
       }
   })
 }
-
 
 //  i dont know whyy req.file is undefined here in the upload function in app
 module.exports = {

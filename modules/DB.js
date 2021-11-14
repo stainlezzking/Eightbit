@@ -3,6 +3,7 @@ require('dotenv').config()
 const mongoose = require("mongoose")
 const countryList = require('country-list')
 const md5 = require("md5")
+const {SendEmail} = require("./automate-email")
 
 
 mongoose.connect("mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@todotest.pephm.mongodb.net/"+process.env.DB_DB+"?retryWrites=true&w=majority")
@@ -83,6 +84,7 @@ const schema = new mongoose.Schema ({
         ],
         withdrawals :[
             { 
+            username : String,
             amount : Number ,
             date : Date ,
             approved : Boolean,
@@ -195,7 +197,7 @@ function saveNewUser(req,res,next){
          notifications : [
              {
                  title : "Click to view message",
-                 body : " Welcome To Eightbit-miners investment platform, we are happy to accompany you on your journey to financial freedom, please note that this notification is how we reach you if we don't use the convetional email, so keep an eye on your notification",
+                 body : " Welcome To Eightbit-miners investment platform, we are happy to accompany you on your journey to financial freedom, please note that this notification is how we reach you if we don't use the convetional email. if you have any questions please chat with our 24/7 support team on the your dashboard page",
                  viewed : false
              }
          ],
@@ -218,7 +220,19 @@ function saveNewUser(req,res,next){
                     // !!!!!! i dont really know if the try or catch will catch this error
                     throw "there was a problem registering you, please report this problem to us"
                     }
-                        next()
+                    // send welcome email to user
+                    html = `
+                            <body style="background-color: black;">
+                                <div style="padding : 20px; text-align:center; color:white;">
+                                    <h1>Hey ${username}, Welcome to Eight bit</h1>
+                                    <p> we happy to welcome you into the family and delighted to go with you on your joiurney to financial Freedom</p>
+                                </div>
+                                <img src="https://www.eightbit-miners.com/static/email_file/welcome.jpg"  width="100%" height="auto">
+                            </body>
+                            `
+                         SendEmail(user.email,html,"Welcome to Eightbit Miners")
+                         .catch(err=> err ? console.log("email could not be sent") : console.log("email sent to " + user.email))
+                         next()
                 })
             }
          }catch(err){
@@ -258,6 +272,7 @@ function checkBallance(req,res,next){
 } 
 const withdrawAndUpdateHistory = async function(user,amount,gateWay,res){
    var  list = [...user.account.withdrawals,{
+        username : user.username,
         amount: Number(amount),
         date: Date(),
         status : "pending",
@@ -265,15 +280,21 @@ const withdrawAndUpdateHistory = async function(user,amount,gateWay,res){
         gateWay,
         sort : user.account.withdrawals.length + 1
     }]
-    investors.updateOne({username: user.username}, {"account.ballance": (user.account.ballance - amount),"account.withdrawals": list}, function(err,success){
-        if(err){
-            res.send("sorry both an error occured, please report this issue") 
-            throw "error occured while trying to update user ballance and withdrawals history"
-        }else{
-            // this function is used to respomd
-            res.render("profile/withdrawalAssurance",{user,amount,gateWay})
-        }
+    investors.findOneAndUpdate({username: user.username}, {"account.ballance": (user.account.ballance - amount),"account.withdrawals": list})
+    .then(data=> {
+       // send email to user saying their withdraw is pending
+       html = `
+       <h1 style="margin-bottom : 20px"> Hey ${data.name} , </h1>
+
+       <p style="margin-bottom : 10px;" > Your request to withdraw $${amount} from your is being processed and will be credited to your crypto wallet within 24 hours </p>
+       <p> please note : that if this request was not made by you, contact our support team on your dashboard or email us at support@eightbit-miners.com
+       to reverse the transaction before it is complete </p> 
+       `
+       SendEmail(data.email, html, "withdrawal request of $"+ amount + " has been placed")
+       // this function is used to respomd
+       res.render("profile/withdrawalAssurance",{user,amount,gateWay})
     })
+    .catch(err=> err ? console.log("error occured while trying to update user ballance and withdrawals history", err): null)
 }
 function markMessageAsViewed(user,message_id){
     investors.updateOne({"notifications._id":message_id },

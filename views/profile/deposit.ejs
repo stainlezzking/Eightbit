@@ -79,8 +79,7 @@
 
             <% if(user.account.deposits.length){ %>
               <% user.account.deposits.sort(sortFunction).forEach((history,index)=>{ %>
-               <% var className = history.approved ?  "text-success" : "text-warning" %>
-               <%  status = history.approved ?  "approved" : "pending" %>
+               <% var className = history.status == "approved" ?  "text-success" : "text-warning" %>
                   <tr>
                     <th scope="row"> <%= index+1 %> </th>
                     <td class="<%= className %>"><%= history.status %></td>
