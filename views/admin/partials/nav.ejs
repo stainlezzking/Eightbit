@@ -31,6 +31,11 @@
               <a class="nav-link" href="/admin/confirm">
                 <i class="fas fa-check-square text-success"></i>
                 <span class="nav-link-text text-dark">Confirm Deposit</span>
+                <% var confirmed = slips.filter(infos => !infos.confirmed) %>
+                <% if(confirmed.length){ %>
+                   <span class="alert bg-success text-white" style="border-radius:50%;  padding: 0px 6px; margin: 0 10px;"> <%= confirmed.length %> </span>
+                <% } %>
+               </span>
               </a>
             </li>
             <li class="nav-item">
@@ -55,6 +60,12 @@
               <a class="nav-link" href="/admin/support">
                 <i class="fas fa-sms text-success"></i>
                 <span class="nav-link-text text-dark">Support</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/withdrawal">
+                <i class="fas fa-money-bill-wave text-danger"></i>
+                <span class="nav-link-text text-dark">Confirm withdrawal</span>
               </a>
             </li>
             <li class="nav-item">

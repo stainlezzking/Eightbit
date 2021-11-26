@@ -1,5 +1,6 @@
 const {adminCollection,investors, confirmCollection} = require("./DB.js")
 
+const {SendEmail} = require("./automate-email.js")
 
 
 
@@ -109,7 +110,6 @@ editInvestor = async function(obj){
     pass = true
     // checking if any filled was left empty
     for(prop in obj){
-        console.log(obj[prop])
         if(!obj[prop].trim()){
            pass = false
            break;
@@ -146,42 +146,82 @@ confirmOrDeleteSlips = async function(obj){
                     })
                     return data
                 }).then(data=>{
-                    investors.updateOne({username:obj.username},
-                        {"account.ballance": Number(data.account.ballance) + Number(obj.amount) ,"account.deposits": data.account.deposits})
-                //   update referral id account
-                    .then(()=>{
-                        if(data.referralAccount){
-                            // find the investor with that referral id 
-                            investors.findOne({referralId : data.referralAccount })
-                            .then((info)=>{
-                                    return investors.updateOne({username : info.username},
-                                         {"account.ballance": Number(info.account.ballance) + Math.ceil(Number(obj.amount) *0.05)})
+                    if(obj.status == "approved"){
+                        investors.updateOne({username:obj.username},
+                            {"account.ballance": Number(data.account.ballance) + Number(obj.amount) ,"account.deposits": data.account.deposits})
+                        .then(()=>{
+                            html = `
+                            <body>
+                            <div style="text-align: center; padding:10px 20px;">
+                              <h2> Hey ${data.name}</h2>
+                              <p> Your deposit of </p>
+                              <h1 style="font-size: bold;"> $${obj.amount}</h1>
+                              <p> Status : <span style="color: green" > Confirmed </span></p>
+                              <p style="margin-bottom: 20px;"> Your deposit of ${obj.amount} has been confirmed and balance updated, you can go ahead and invest in the plans of your choice now </p>
+                              <div stylre="text-align: center; padding: 20px;"> 
+                              <img width="100%" height="auto" src="https://www.eightbit-miners.com/static/email_file/CREDIT.jpg" />
+                              </div>
+                              <p>
+                               visit your <a href="https://www.eightbit-miners.com/dashboard" >account </a>
+                            </p>
+                            </div>
+                          </body>
+                            `
+                            SendEmail(data.email,html, "your Deposit of $"+obj.amount+ " has been confirmed" )
+                            .catch(err=> err? console.log("error occured trying to sendemail in confirmationSlips"): console.log("email sent successfully "))
+                        //   update referral id account
+                            if(data.referralAccount){
+                                // find the investor with that referral id 
+                                investors.findOne({referralId : data.referralAccount })
+                                .then((info)=>{
+                                        return investors.updateOne({username : info.username},
+                                             {"account.ballance": Number(info.account.ballance) + Math.ceil(Number(obj.amount) *0.05)})
+                                })
+                            }
+                        })
+                    }else {
+                        // fake transaction
+                        investors.findOneAndUpdate({username:obj.username},
+                            {"account.deposits": data.account.deposits}, function(err, data){
+                                if(err){
+                                    console.log("the error gotten is "+ err)
+                                }else{
+                                    html =`
+                                    <body>
+                                    <div style="text-align: center; padding:10px 20px;">
+                                      <h2> Hey ${data.name}</h2>
+                                      <p> Your deposit of </p>
+                                      <h3 style="font-size: bold;"> $${obj.amount}</h3>
+                                      <p> Status : <span style="color: red" > Failed </span></p>
+                                      <div stylre="text-align: center; padding: 20px;"> 
+                                      <img width="150px" height="150px" src="https://www.eightbit-miners.com/static/images/favicon.png" />
+                                      </div>
+                                      <p style="margin-bottom: 20px;"> Your deposit of ${obj.amount} has been crosschecked and declined, please note that this maybe as 
+                                      a result of the wrong picture being uploaded, visit the site and try uploading the correct receipt (screenshot), also note that
+                                      too many attempts of uploading the wrong receipt could lead to your account being suspended or even banned.
+                                      </p>
+                                      <p> rememeber you can always speak to our customer care if you have questions, visit your <a href="https://www.eightbit-miners.com/dashboard"> dashboard </a> to speak to one
+                                      or reach us through email at support@eightbit-miners.com </p>
+                                      <p>
+                                      visit your   <a href="https://www.eightbit-miners.com/dashboard" >account </a>
+                                    </p>
+                                    </div>
+                                  </body>
+                                    `
+                                    SendEmail(data.email,html, "your Deposit of $"+obj.amount+ " has been Declined" )
+                                    .catch(err=> err? console.log("error occured trying to sendemail in confirmationSlips"): console.log("email sent successfully "))
+
+                                    console.log("declined deposits confirmation history updated "+ data)
+                                }
                             })
-                        }
-                    })
+                    }
+  
                 })
             })
             .catch(err=> console.log("an error occured while trying to confirm SLip in confirmOrDeleteSlips function ", err))
         }
         if(obj.action == "delete"){
-            return confirmCollection.deleteOne({identifier : obj.identifier}).then(()=>{
-                investors.findOne({username: obj.username},{"account.deposits": 1,_id:0}).then(data=>{
-                    Data = [...data.account.deposits]
-                     Data.forEach(data=>{
-                        if(data.identifier === obj.identifer){
-                            data.amount = obj.amount;
-                            data.status = obj.status,
-                            data.approved = true
-                        } 
-                    })
-                    return Data
-                })
-                 .then(data=>{
-                        console.log(data)
-                        investors.updateOne({username:obj.username},{"account.deposits": data})
-                        .catch(err=> console.log("error occured in confirmOrDeleteFunctino oooo",err))
-                    })
-            })
+            return confirmCollection.deleteOne({identifier : obj.identifier})
             .catch(err=> console.log("there was an error trying to delete a slip in the confirmOrDeleteSlips function", err))
         }
         else{
@@ -195,6 +235,81 @@ resolveResquests = async function(req){
     })
     .catch(err=> console.log("error occured while trying to resolveRequest", err))
 }
+confirmWithdrawal = async function(req){
+
+   if(req.body.action == "confirm"){
+       return investors.findOneAndUpdate({"account.withdrawals._id": req.body.id},{"account.withdrawals.$.approved": true,
+        "account.withdrawals.$.status": "complete"})
+       .then(data=>{
+        activeWithdrawal = data.account.withdrawals.find(each=> each._id == req.body.id)
+           html =          `
+           <body>
+           <div style="text-align: center; padding:10px 20px;">
+             <h2> Hey ${data.name}</h2>
+             <p>
+              Your application for withdrawal of<span style = "font-weight : bold"> $${activeWithdrawal.amount}</span> has been approved and 
+              and credited to your account ${data.walletAddress},
+              <p style="margin: 15px 0;"> 
+               the transaction id ${activeWithdrawal._id}
+               </p>
+             </p>
+             <div stylre="text-align: center; padding: 20px;"> 
+             <img width="100%" height="auto" src="https://www.eightbit-miners.com/static/email_file/withdraw.jpg" />
+             </div>
+             <p style="margin-bottom: 20px;"> thank you for using our services  </p>
+             <p>
+             visit your  <a href="https://www.eightbit-miners.com/dashboard" >account </a>
+           </p>
+           </div>
+         </body>
+           `
+         SendEmail(data.email, html, "Eightbit Transaction Alert (withdrawal)").then(dat=>{
+        console.log("email sent to " + data.email, dat)
+         })
+       })
+       .catch(err=> console.log("the error you got is ", err))
+   }
+   if(req.body.action == "decline"){
+    return investors.findOneAndUpdate({"account.withdrawals._id": req.body.id},{"account.withdrawals.$.approved": true,
+     "account.withdrawals.$.status": "declined"})
+    .then(data=> {
+        activeWithdrawal = data.account.withdrawals.find(each=> each._id == req.body.id)
+        html =          
+        `
+        <body>
+        <div style="text-align: center; padding:10px 20px;">
+          <h2> Hello ${data.name}</h2>
+          <p>
+          we are sorry to inform you that your application for withdrawal of<span style = "font-weight : bold"> $${activeWithdrawal.amount}</span> 
+          with transaction id of ${activeWithdrawal._id} has been declined, as you did not meet the 
+          requirements for this withdrawal, please contact our care service on your dashboard for more 
+          infomation on how to complete your withdrawal or through email at support@eightbit-miners.com.
+        
+          <p style="margin: 15px 0;"> 
+             we are sorry for the inconvenience this might have caused you.
+            </p>
+          </p>
+          <div stylre="text-align: center; padding: 20px;"> 
+          <img width="100%" height="auto" src="https://www.eightbit-miners.com/static/email_file/decline.png" />
+          </div>
+          <p style="margin-bottom: 20px;"> thank you for using our services  </p>
+          <p>
+          visit your  <a href="https://www.eightbit-miners.com/dashboard" >account </a>
+        </p>
+        </div>
+      </body>
+        `
+        SendEmail(data.email, html, "Eightbit Transaction Alert (withdrawal)")
+        .then(dat=>{
+         console.log("email sent to " + data.email, dat)
+          })
+    })
+    .catch(err=> console.log("the error you got is ", err))
+}
+    // else if not both decline or confirm
+throw " your response has to be either decline or confirm"
+}
+
 module.exports = {
     getInvestmentsOptions,
     cyclePlans,

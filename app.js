@@ -237,7 +237,6 @@ app.get("/logout", function(req,res){
 
 
 
-
 // App POST REQUEST 
 app.post("/register",saveNewUser, passport.authenticate("user-account",{
     successRedirect : "/dashboard",
@@ -273,7 +272,6 @@ app.post("/invest/:planId",cyclePlans, function(req,res){
 
 
 app.post("/confirm", function(req,res){
-
        return upload(req, res, function (err) {
            console.log("your req.files object is", req.file)
             if (err instanceof multer.MulterError) {
@@ -397,6 +395,14 @@ app.get("/admin/support", adminAuth,  function(req,res){
     })
     .catch(err=> res.send("An errror occured! trying to get "+ req.url))
 })
+
+app.get("/admin/withdrawal", adminAuth,  function(req,res){
+    getNeededVariables().then(data=>{
+        return res.render("admin/confirmWithdrawals", data)
+    })
+    .catch(err=> res.send("An errror occured! trying to get "+ req.url))
+})
+
 app.get("/admin/account", adminAuth,  function(req,res){
     getNeededVariables().then(data=>{
         return res.render("admin/account", data)
@@ -488,6 +494,17 @@ app.post("/admin/request", function(req,res){
     })
     
 })
+
+app.post("/admin/withdrawal", function(req,res){
+    return confirmWithdrawal(req)  
+    .then(()=> res.redirect("/admin/withdrawal"))
+    .catch(err=> {
+        res.send("the error you got is ", err)
+        console.log("the error you got is ", err)
+    })
+})
+
+
 // delete investment plans
 app.post("/admin/delete/:id", function(req,res){
        return  adminCollection.findOne({username: process.env.DB_ADMIN_USER},{investmentPlans:1})
@@ -502,33 +519,33 @@ app.post("/admin/delete/:id", function(req,res){
 
 //  update investment plans
 app.post("/admin/update", function(req,res){
-    console.log(req.body)
         return adminCollection.updateOne({username:process.env.DB_ADMIN_USER},{$push:{investmentPlans : req.body}})
         .then(()=> res.redirect("/admin/update"))
         .catch(err=> console.log("an error occured while adding new investment plan", err))
 })
 
-app.post("/admin/account", function(req,res){
-    console.log(req.body)
-    if(req.body.address.trim() && req.body.gateWay){
-            if(req.body.gateWay === "btc"){
-               return adminCollection.updateOne({username :process.env.DB_ADMIN_USER},{"account.btc": req.body.address})
-                .then(data=> res.redirect("/admin/account"))
-                .catch(err=> console.log("an error occured ", err))
-            }
-            else if(req.body.gateWay === "etherium"){
-               return adminCollection.updateOne({username :process.env.DB_ADMIN_USER},{"account.etherium": req.body.address})
-                .then(data=> res.redirect("/admin/account"))
-                .catch(err=> console.log("an error occured ", err))
-            }
-            res.send("<h1>Seems you put a payment means that is not recognized </h1>")
+//   PREVENTING THE ACT OF CHANGING ADDRESS TO PREVENT BEING PLAYED
+// app.post("/admin/account", function(req,res){
+//     console.log(req.body)
+//     if(req.body.address.trim() && req.body.gateWay){
+//             if(req.body.gateWay === "btc"){
+//                return adminCollection.updateOne({username :process.env.DB_ADMIN_USER},{"account.btc": req.body.address})
+//                 .then(data=> res.redirect("/admin/account"))
+//                 .catch(err=> console.log("an error occured ", err))
+//             }
+//             else if(req.body.gateWay === "etherium"){
+//                return adminCollection.updateOne({username :process.env.DB_ADMIN_USER},{"account.etherium": req.body.address})
+//                 .then(data=> res.redirect("/admin/account"))
+//                 .catch(err=> console.log("an error occured ", err))
+//             }
+//             res.send("<h1>Seems you put a payment means that is not recognized </h1>")
               
-        }
-        else{
-            res.send("<h1>Fill both input fields </h1>")
-            res.end()
-        }
-})
+//         }
+//         else{
+//             res.send("<h1>Fill both input fields </h1>")
+//             res.end()
+//         }
+// })
 
 
 
